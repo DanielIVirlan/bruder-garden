@@ -214,7 +214,7 @@ export default function Home() {
             initial={{ opacity: 0, backdropFilter: "blur(0px)" }}
             animate={{ opacity: 1, backdropFilter: "blur(8px)" }}
             exit={{ opacity: 0, backdropFilter: "blur(0px)" }}
-            className="fixed inset-0 z-[100] flex items-center justify-center bg-stone-900/80 p-4"
+            className="fixed inset-0 z-100 flex items-center justify-center bg-stone-900/80 p-4"
             onClick={() => setServizioSelezionato(null)} 
           >
             <motion.div 
@@ -222,7 +222,7 @@ export default function Home() {
               animate={{ scale: 1, y: 0, opacity: 1 }}
               exit={{ scale: 0.9, y: 20, opacity: 0 }}
               transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="bg-white max-w-2xl w-full rounded-[2rem] shadow-2xl overflow-hidden"
+              className="bg-white max-w-2xl w-full rounded-4xl shadow-2xl overflow-hidden"
               onClick={(e) => e.stopPropagation()} 
             >
               <div className="bg-green-50 p-6 md:p-8 flex justify-between items-start border-b border-green-100">
@@ -277,7 +277,7 @@ export default function Home() {
               initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }} variants={slideInLeft}
               className="w-full md:w-1/2"
             >
-              <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl aspect-[4/5] md:aspect-square group">
+              <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl aspect-4/5 md:aspect-square group">
                 {/* Immagine segnaposto: cambierai 'src' in locale es: src="/foto-amico.jpg" quando ce l'avrai */}
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img 
@@ -354,7 +354,7 @@ export default function Home() {
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={lavoro.galleria[0]} alt={lavoro.titolo} className="object-cover w-full h-full transform group-hover:scale-110 transition-transform duration-700" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/20 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
                   <h4 className="text-white font-bold text-xl">{lavoro.titolo}</h4>
                   <p className="text-green-400 text-sm mt-1 font-semibold flex items-center gap-1">
                     Clicca per {lavoro.galleria.length} foto <ChevronRight size={16} />
@@ -373,13 +373,13 @@ export default function Home() {
             initial={{ opacity: 0, backdropFilter: "blur(0px)" }}
             animate={{ opacity: 1, backdropFilter: "blur(8px)" }}
             exit={{ opacity: 0, backdropFilter: "blur(0px)" }}
-            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4"
+            className="fixed inset-0 z-100 flex items-center justify-center bg-black/90 p-4"
             onClick={() => setLavoroSelezionato(null)} 
           >
-            <button className="absolute top-6 right-6 text-stone-400 hover:text-white hover:rotate-90 transition-all duration-300 z-[101]" onClick={() => setLavoroSelezionato(null)}>
+            <button className="absolute top-6 right-6 text-stone-400 hover:text-white hover:rotate-90 transition-all duration-300 z-101" onClick={() => setLavoroSelezionato(null)}>
               <X size={48} />
             </button>
-            <button className="absolute left-2 md:left-10 text-stone-400 hover:text-white hover:-translate-x-2 transition-all z-[101]" onClick={fotoPrecedente}>
+            <button className="absolute left-2 md:left-10 text-stone-400 hover:text-white hover:-translate-x-2 transition-all z-101" onClick={fotoPrecedente}>
               <ChevronLeft size={56} />
             </button>
             <div className="relative max-w-5xl w-full flex flex-col items-center">
@@ -402,7 +402,7 @@ export default function Home() {
                 <p className="text-green-400 font-medium">Foto {indiceFoto + 1} di {lavoroSelezionato.galleria.length}</p>
               </motion.div>
             </div>
-            <button className="absolute right-2 md:right-10 text-stone-400 hover:text-white hover:translate-x-2 transition-all z-[101]" onClick={fotoSuccessiva}>
+            <button className="absolute right-2 md:right-10 text-stone-400 hover:text-white hover:translate-x-2 transition-all z-101" onClick={fotoSuccessiva}>
               <ChevronRight size={56} />
             </button>
           </motion.div>
