@@ -29,20 +29,31 @@ export default function Home() {
   const [lavoroSelezionato, setLavoroSelezionato] = useState<Lavoro | null>(null);
   const [indiceFoto, setIndiceFoto] = useState(0);
   const [servizioSelezionato, setServizioSelezionato] = useState<Servizio | null>(null);
-  
-  // STATO PER IL MENU MOBILE (Aperto/Chiuso)
   const [menuAperto, setMenuAperto] = useState(false);
 
-  // FIX: Impedisce al browser di saltare in basso quando si aggiorna la pagina
+  // 1. FIX: Impedisce il salto dello scroll al refresh
   useEffect(() => {
     if ('scrollRestoration' in history) {
       history.scrollRestoration = 'manual';
     }
-    // Se non ci sono "ancore" (#) nell'URL, forza lo scroll all'inizio
     if (!window.location.hash) {
       window.scrollTo(0, 0);
     }
   }, []);
+
+  // 2. FIX: Blocca lo scroll in background quando apri un menu o una modale
+  useEffect(() => {
+    if (lavoroSelezionato || servizioSelezionato || menuAperto) {
+      document.body.style.overflow = "hidden"; // Blocca
+    } else {
+      document.body.style.overflow = "auto";   // Sblocca
+    }
+    
+    // Cleanup: assicura che lo scroll torni normale se il componente si smonta
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [lavoroSelezionato, servizioSelezionato, menuAperto]);
 
   // --- MOTORE DELLE ANIMAZIONI ---
   const staggerContainer: Variants = {
@@ -82,21 +93,17 @@ export default function Home() {
         className="fixed top-0 w-full bg-white/95 backdrop-blur-md shadow-sm z-50"
       >
         <div className="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
-          
-          {/* LOGO */}
           <div className="flex items-center gap-2 text-green-700 font-black text-2xl tracking-tighter z-50">
             <Leaf size={28} />
             BRUDER GARDEN
           </div>
 
-          {/* MENU DESKTOP (Invisibile su cellulare) */}
           <div className="hidden md:flex gap-6 font-semibold text-stone-600 items-center">
             <a href="#servizi" className="hover:text-green-700 transition-colors">Servizi & Prezzi</a>
             <a href="#lavori" className="hover:text-green-700 transition-colors">I Nostri Lavori</a>
             <a href="#contatti" className="bg-green-600 text-white px-5 py-2 rounded-full hover:bg-green-500 transition-colors">Contatti</a>
           </div>
 
-          {/* BOTTONE HAMBURGER MOBILE (Invisibile su PC) */}
           <button 
             className="md:hidden text-stone-800 p-2 z-50"
             onClick={() => setMenuAperto(!menuAperto)}
@@ -205,7 +212,7 @@ export default function Home() {
             initial={{ opacity: 0, backdropFilter: "blur(0px)" }}
             animate={{ opacity: 1, backdropFilter: "blur(8px)" }}
             exit={{ opacity: 0, backdropFilter: "blur(0px)" }}
-            className="fixed inset-0 z-[100] flex items-center justify-center bg-stone-900/80 p-4"
+            className="fixed inset-0 z-100 flex items-center justify-center bg-stone-900/80 p-4"
             onClick={() => setServizioSelezionato(null)} 
           >
             <motion.div 
@@ -213,7 +220,7 @@ export default function Home() {
               animate={{ scale: 1, y: 0, opacity: 1 }}
               exit={{ scale: 0.9, y: 20, opacity: 0 }}
               transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="bg-white max-w-2xl w-full rounded-[2rem] shadow-2xl overflow-hidden"
+              className="bg-white max-w-2xl w-full rounded-4xl shadow-2xl overflow-hidden"
               onClick={(e) => e.stopPropagation()} 
             >
               <div className="bg-green-50 p-6 md:p-8 flex justify-between items-start border-b border-green-100">
@@ -246,7 +253,7 @@ export default function Home() {
               <div className="bg-stone-50 p-6 text-center border-t border-stone-100">
                 <p className="text-sm text-stone-500 mb-4">I prezzi sono indicativi e possono variare in base alle condizioni del giardino.</p>
                 <a 
-                  href="https://wa.me/393331234567" 
+                  href="https://wa.me/393892579007" 
                   target="_blank" rel="noreferrer"
                   className="inline-flex items-center justify-center gap-2 w-full md:w-auto bg-green-600 hover:bg-green-500 text-white px-8 py-3 rounded-full font-bold transition-colors"
                 >
@@ -288,7 +295,7 @@ export default function Home() {
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={lavoro.galleria[0]} alt={lavoro.titolo} className="object-cover w-full h-full transform group-hover:scale-110 transition-transform duration-700" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/20 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
                   <h4 className="text-white font-bold text-xl">{lavoro.titolo}</h4>
                   <p className="text-green-400 text-sm mt-1 font-semibold flex items-center gap-1">
                     Clicca per {lavoro.galleria.length} foto <ChevronRight size={16} />
@@ -307,13 +314,13 @@ export default function Home() {
             initial={{ opacity: 0, backdropFilter: "blur(0px)" }}
             animate={{ opacity: 1, backdropFilter: "blur(8px)" }}
             exit={{ opacity: 0, backdropFilter: "blur(0px)" }}
-            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4"
+            className="fixed inset-0 z-100 flex items-center justify-center bg-black/90 p-4"
             onClick={() => setLavoroSelezionato(null)} 
           >
-            <button className="absolute top-6 right-6 text-stone-400 hover:text-white hover:rotate-90 transition-all duration-300 z-[101]" onClick={() => setLavoroSelezionato(null)}>
+            <button className="absolute top-6 right-6 text-stone-400 hover:text-white hover:rotate-90 transition-all duration-300 z-101" onClick={() => setLavoroSelezionato(null)}>
               <X size={48} />
             </button>
-            <button className="absolute left-2 md:left-10 text-stone-400 hover:text-white hover:-translate-x-2 transition-all z-[101]" onClick={fotoPrecedente}>
+            <button className="absolute left-2 md:left-10 text-stone-400 hover:text-white hover:-translate-x-2 transition-all z-101" onClick={fotoPrecedente}>
               <ChevronLeft size={56} />
             </button>
             <div className="relative max-w-5xl w-full flex flex-col items-center">
@@ -336,7 +343,7 @@ export default function Home() {
                 <p className="text-green-400 font-medium">Foto {indiceFoto + 1} di {lavoroSelezionato.galleria.length}</p>
               </motion.div>
             </div>
-            <button className="absolute right-2 md:right-10 text-stone-400 hover:text-white hover:translate-x-2 transition-all z-[101]" onClick={fotoSuccessiva}>
+            <button className="absolute right-2 md:right-10 text-stone-400 hover:text-white hover:translate-x-2 transition-all z-101" onClick={fotoSuccessiva}>
               <ChevronRight size={56} />
             </button>
           </motion.div>
@@ -365,19 +372,20 @@ export default function Home() {
 
             <div className="hidden md:block w-px h-32 bg-stone-100 z-10" /> 
 
-            <a href="tel:+393331234567" className="flex flex-col items-center gap-4 z-10 group cursor-pointer">
+            {/* NUMERO TELEFONICO AGGIORNATO */}
+            <a href="tel:+393892579007" className="flex flex-col items-center gap-4 z-10 group cursor-pointer">
               <motion.div animate={{ y: [0, -10, 0] }} transition={{ repeat: Infinity, duration: 3, ease: "easeInOut", delay: 0.5 }} className="w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center shadow-inner group-hover:bg-green-600 group-hover:text-white transition-colors duration-300">
                 <Phone size={36} />
               </motion.div>
               <div className="text-center">
                 <h4 className="font-bold text-2xl text-stone-800 group-hover:text-green-600 transition-colors">Chiamaci Subito</h4>
-                <p className="text-stone-500 font-medium text-lg group-hover:text-green-500 transition-colors">+39 333 123 4567</p>
+                <p className="text-stone-500 font-medium text-lg group-hover:text-green-500 transition-colors">389 257 9007</p>
               </div>
             </a>
           </div>
 
           <motion.div className="mt-14" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-            <a href="https://wa.me/393331234567" target="_blank" rel="noreferrer" className="inline-flex items-center gap-3 bg-[#25D366] text-white px-10 py-5 rounded-full font-bold text-xl shadow-xl hover:bg-[#20b858] transition-colors">
+            <a href="https://wa.me/393892579007" target="_blank" rel="noreferrer" className="inline-flex items-center gap-3 bg-[#25D366] text-white px-10 py-5 rounded-full font-bold text-xl shadow-xl hover:bg-[#20b858] transition-colors">
               <MessageCircle size={28} />
               Scrivici su WhatsApp
             </a>
