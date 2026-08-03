@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence, Variants } from "framer-motion";
-import { Leaf, Phone, MapPin, CheckCircle, MessageCircle, X, ChevronLeft, ChevronRight, Info } from "lucide-react";
+import { Leaf, Phone, MapPin, CheckCircle, MessageCircle, X, ChevronLeft, ChevronRight, Info, Menu } from "lucide-react";
 import prezzi from "../data/prezzi.json";
 import lavori from "../data/lavori.json";
 
@@ -28,29 +28,31 @@ type Servizio = {
 export default function Home() {
   const [lavoroSelezionato, setLavoroSelezionato] = useState<Lavoro | null>(null);
   const [indiceFoto, setIndiceFoto] = useState(0);
-  
-  // Stato per la modale dei prezzi
   const [servizioSelezionato, setServizioSelezionato] = useState<Servizio | null>(null);
+  
+  // STATO PER IL MENU MOBILE (Aperto/Chiuso)
+  const [menuAperto, setMenuAperto] = useState(false);
+
+  // FIX: Impedisce al browser di saltare in basso quando si aggiorna la pagina
+  useEffect(() => {
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+    // Se non ci sono "ancore" (#) nell'URL, forza lo scroll all'inizio
+    if (!window.location.hash) {
+      window.scrollTo(0, 0);
+    }
+  }, []);
 
   // --- MOTORE DELLE ANIMAZIONI ---
   const staggerContainer: Variants = {
     hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-      },
-    },
+    show: { opacity: 1, transition: { staggerChildren: 0.15 } },
   };
 
   const popUpSpring: Variants = {
     hidden: { opacity: 0, y: 60, scale: 0.9 },
-    show: { 
-      opacity: 1, 
-      y: 0, 
-      scale: 1,
-      transition: { type: "spring", stiffness: 80, damping: 12 } 
-    },
+    show: { opacity: 1, y: 0, scale: 1, transition: { type: "spring", stiffness: 80, damping: 12 } },
   };
 
   const slideInLeft: Variants = {
@@ -70,7 +72,7 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-stone-50 font-sans text-stone-900 overflow-hidden">
+    <div className="min-h-screen bg-stone-50 font-sans text-stone-900 overflow-x-hidden">
       
       {/* NAVBAR */}
       <motion.nav 
@@ -81,18 +83,45 @@ export default function Home() {
       >
         <div className="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
           
-          {/* LOGO TESTUALE RIPRISTINATO */}
-          <div className="flex items-center gap-2 text-green-700 font-black text-2xl tracking-tighter">
+          {/* LOGO */}
+          <div className="flex items-center gap-2 text-green-700 font-black text-2xl tracking-tighter z-50">
             <Leaf size={28} />
             BRUDER GARDEN
           </div>
 
+          {/* MENU DESKTOP (Invisibile su cellulare) */}
           <div className="hidden md:flex gap-6 font-semibold text-stone-600 items-center">
             <a href="#servizi" className="hover:text-green-700 transition-colors">Servizi & Prezzi</a>
             <a href="#lavori" className="hover:text-green-700 transition-colors">I Nostri Lavori</a>
             <a href="#contatti" className="bg-green-600 text-white px-5 py-2 rounded-full hover:bg-green-500 transition-colors">Contatti</a>
           </div>
+
+          {/* BOTTONE HAMBURGER MOBILE (Invisibile su PC) */}
+          <button 
+            className="md:hidden text-stone-800 p-2 z-50"
+            onClick={() => setMenuAperto(!menuAperto)}
+          >
+            {menuAperto ? <X size={32} /> : <Menu size={32} />}
+          </button>
         </div>
+
+        {/* MENU A TENDINA PER MOBILE */}
+        <AnimatePresence>
+          {menuAperto && (
+            <motion.div 
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              className="md:hidden bg-white border-t border-stone-100 shadow-xl overflow-hidden"
+            >
+              <div className="flex flex-col px-6 py-6 gap-6 font-bold text-lg text-stone-700 text-center">
+                <a href="#servizi" onClick={() => setMenuAperto(false)} className="hover:text-green-600">Servizi & Prezzi</a>
+                <a href="#lavori" onClick={() => setMenuAperto(false)} className="hover:text-green-600">I Nostri Lavori</a>
+                <a href="#contatti" onClick={() => setMenuAperto(false)} className="bg-green-600 text-white py-3 rounded-full">Contatti</a>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </motion.nav>
 
       {/* HERO SECTION */}
@@ -176,7 +205,7 @@ export default function Home() {
             initial={{ opacity: 0, backdropFilter: "blur(0px)" }}
             animate={{ opacity: 1, backdropFilter: "blur(8px)" }}
             exit={{ opacity: 0, backdropFilter: "blur(0px)" }}
-            className="fixed inset-0 z-100 flex items-center justify-center bg-stone-900/80 p-4"
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-stone-900/80 p-4"
             onClick={() => setServizioSelezionato(null)} 
           >
             <motion.div 
@@ -184,7 +213,7 @@ export default function Home() {
               animate={{ scale: 1, y: 0, opacity: 1 }}
               exit={{ scale: 0.9, y: 20, opacity: 0 }}
               transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="bg-white max-w-2xl w-full rounded-4xl shadow-2xl overflow-hidden"
+              className="bg-white max-w-2xl w-full rounded-[2rem] shadow-2xl overflow-hidden"
               onClick={(e) => e.stopPropagation()} 
             >
               <div className="bg-green-50 p-6 md:p-8 flex justify-between items-start border-b border-green-100">
@@ -204,9 +233,9 @@ export default function Home() {
                 <h4 className="font-bold text-stone-800 mb-4 text-lg border-b border-stone-100 pb-2">Listino Dettagliato</h4>
                 <ul className="space-y-4">
                   {servizioSelezionato.dettagli.map((dettaglio, idx) => (
-                    <li key={idx} className="flex justify-between items-center py-2 border-b border-stone-50 last:border-0">
+                    <li key={idx} className="flex flex-col md:flex-row md:justify-between md:items-center py-2 border-b border-stone-50 last:border-0 gap-2">
                       <span className="text-stone-700">{dettaglio.nome}</span>
-                      <span className="font-bold text-stone-900 bg-stone-100 px-3 py-1 rounded-lg text-sm text-right whitespace-nowrap ml-4">
+                      <span className="font-bold text-stone-900 bg-stone-100 px-3 py-1 rounded-lg text-sm text-center md:text-right whitespace-nowrap">
                         {dettaglio.costo}
                       </span>
                     </li>
@@ -217,7 +246,7 @@ export default function Home() {
               <div className="bg-stone-50 p-6 text-center border-t border-stone-100">
                 <p className="text-sm text-stone-500 mb-4">I prezzi sono indicativi e possono variare in base alle condizioni del giardino.</p>
                 <a 
-                  href="https://wa.me/393892579007" 
+                  href="https://wa.me/393331234567" 
                   target="_blank" rel="noreferrer"
                   className="inline-flex items-center justify-center gap-2 w-full md:w-auto bg-green-600 hover:bg-green-500 text-white px-8 py-3 rounded-full font-bold transition-colors"
                 >
@@ -259,7 +288,7 @@ export default function Home() {
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={lavoro.galleria[0]} alt={lavoro.titolo} className="object-cover w-full h-full transform group-hover:scale-110 transition-transform duration-700" />
-                <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/20 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
                   <h4 className="text-white font-bold text-xl">{lavoro.titolo}</h4>
                   <p className="text-green-400 text-sm mt-1 font-semibold flex items-center gap-1">
                     Clicca per {lavoro.galleria.length} foto <ChevronRight size={16} />
@@ -278,13 +307,13 @@ export default function Home() {
             initial={{ opacity: 0, backdropFilter: "blur(0px)" }}
             animate={{ opacity: 1, backdropFilter: "blur(8px)" }}
             exit={{ opacity: 0, backdropFilter: "blur(0px)" }}
-            className="fixed inset-0 z-100 flex items-center justify-center bg-black/90 p-4"
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4"
             onClick={() => setLavoroSelezionato(null)} 
           >
-            <button className="absolute top-6 right-6 text-stone-400 hover:text-white hover:rotate-90 transition-all duration-300 z-101" onClick={() => setLavoroSelezionato(null)}>
+            <button className="absolute top-6 right-6 text-stone-400 hover:text-white hover:rotate-90 transition-all duration-300 z-[101]" onClick={() => setLavoroSelezionato(null)}>
               <X size={48} />
             </button>
-            <button className="absolute left-2 md:left-10 text-stone-400 hover:text-white hover:-translate-x-2 transition-all z-101" onClick={fotoPrecedente}>
+            <button className="absolute left-2 md:left-10 text-stone-400 hover:text-white hover:-translate-x-2 transition-all z-[101]" onClick={fotoPrecedente}>
               <ChevronLeft size={56} />
             </button>
             <div className="relative max-w-5xl w-full flex flex-col items-center">
@@ -307,7 +336,7 @@ export default function Home() {
                 <p className="text-green-400 font-medium">Foto {indiceFoto + 1} di {lavoroSelezionato.galleria.length}</p>
               </motion.div>
             </div>
-            <button className="absolute right-2 md:right-10 text-stone-400 hover:text-white hover:translate-x-2 transition-all z-101" onClick={fotoSuccessiva}>
+            <button className="absolute right-2 md:right-10 text-stone-400 hover:text-white hover:translate-x-2 transition-all z-[101]" onClick={fotoSuccessiva}>
               <ChevronRight size={56} />
             </button>
           </motion.div>
@@ -320,8 +349,6 @@ export default function Home() {
           <h2 className="text-4xl font-bold text-green-900 mb-8">Pronto per un giardino perfetto?</h2>
           
           <div className="bg-white p-10 rounded-[2.5rem] shadow-2xl flex flex-col md:flex-row items-center justify-around gap-8 border-t-8 border-green-500 relative overflow-hidden">
-            
-            {/* ICONA FOGLIA RIPRISTINATA COME DECORO */}
             <div className="absolute -right-10 -top-10 text-green-50 opacity-50 pointer-events-none">
               <Leaf size={200} />
             </div>
@@ -338,19 +365,19 @@ export default function Home() {
 
             <div className="hidden md:block w-px h-32 bg-stone-100 z-10" /> 
 
-            <a href="tel:+393892579007" className="flex flex-col items-center gap-4 z-10 group cursor-pointer">
+            <a href="tel:+393331234567" className="flex flex-col items-center gap-4 z-10 group cursor-pointer">
               <motion.div animate={{ y: [0, -10, 0] }} transition={{ repeat: Infinity, duration: 3, ease: "easeInOut", delay: 0.5 }} className="w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center shadow-inner group-hover:bg-green-600 group-hover:text-white transition-colors duration-300">
                 <Phone size={36} />
               </motion.div>
               <div className="text-center">
                 <h4 className="font-bold text-2xl text-stone-800 group-hover:text-green-600 transition-colors">Chiamaci Subito</h4>
-                <p className="text-stone-500 font-medium text-lg group-hover:text-green-500 transition-colors">+39 389 257 9007</p>
+                <p className="text-stone-500 font-medium text-lg group-hover:text-green-500 transition-colors">+39 333 123 4567</p>
               </div>
             </a>
           </div>
 
           <motion.div className="mt-14" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-            <a href="https://wa.me/3892579007" target="_blank" rel="noreferrer" className="inline-flex items-center gap-3 bg-[#25D366] text-white px-10 py-5 rounded-full font-bold text-xl shadow-xl hover:bg-[#20b858] transition-colors">
+            <a href="https://wa.me/393331234567" target="_blank" rel="noreferrer" className="inline-flex items-center gap-3 bg-[#25D366] text-white px-10 py-5 rounded-full font-bold text-xl shadow-xl hover:bg-[#20b858] transition-colors">
               <MessageCircle size={28} />
               Scrivici su WhatsApp
             </a>
@@ -358,7 +385,7 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* FOOTER RIPRISTINATO */}
+      {/* FOOTER */}
       <footer className="bg-stone-900 text-stone-400 py-10 text-center flex flex-col items-center">
         <div className="flex justify-center items-center gap-2 mb-4 text-stone-500">
           <Leaf size={20} />
