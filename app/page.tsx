@@ -99,8 +99,8 @@ export default function Home() {
           </div>
 
           <div className="hidden md:flex gap-6 font-semibold text-stone-600 items-center">
-            <a href="#servizi" className="hover:text-green-700 transition-colors">Servizi & Prezzi</a>
             <a href="#chi-siamo" className="hover:text-green-700 transition-colors">Chi Siamo</a>
+            <a href="#servizi" className="hover:text-green-700 transition-colors">Servizi & Prezzi</a>
             <a href="#lavori" className="hover:text-green-700 transition-colors">I Nostri Lavori</a>
             <a href="#contatti" className="bg-green-600 text-white px-5 py-2 rounded-full hover:bg-green-500 transition-colors">Contatti</a>
           </div>
@@ -123,8 +123,8 @@ export default function Home() {
               className="md:hidden bg-white border-t border-stone-100 shadow-xl overflow-hidden"
             >
               <div className="flex flex-col px-6 py-6 gap-6 font-bold text-lg text-stone-700 text-center">
-                <a href="#servizi" onClick={() => setMenuAperto(false)} className="hover:text-green-600">Servizi & Prezzi</a>
                 <a href="#chi-siamo" onClick={() => setMenuAperto(false)} className="hover:text-green-600">Chi Siamo</a>
+                <a href="#servizi" onClick={() => setMenuAperto(false)} className="hover:text-green-600">Servizi & Prezzi</a>
                 <a href="#lavori" onClick={() => setMenuAperto(false)} className="hover:text-green-600">I Nostri Lavori</a>
                 <a href="#contatti" onClick={() => setMenuAperto(false)} className="bg-green-600 text-white py-3 rounded-full">Contatti</a>
               </div>
@@ -160,6 +160,62 @@ export default function Home() {
             </a>
           </motion.div>
         </motion.div>
+      </section>
+
+      {/* SEZIONE CHI SIAMO */}
+      <section id="chi-siamo" className="py-24 px-4 bg-white">
+        <div className="max-w-6xl mx-auto pt-10">
+          <div className="flex flex-col md:flex-row items-center gap-12 md:gap-16">
+            
+            {/* Foto Chi Siamo */}
+            <motion.div 
+              initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }} variants={slideInLeft}
+              className="w-full md:w-1/2"
+            >
+              <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl aspect-4/5 md:aspect-square group">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img 
+                  src="profilo.png" 
+                  alt="Il fondatore di Bruder Garden" 
+                  className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
+                />
+                {/* Bordino decorativo interno */}
+                <div className="absolute inset-0 border-4 border-green-500 rounded-[2.5rem] scale-95 opacity-50 pointer-events-none"></div>
+              </div>
+            </motion.div>
+
+            {/* Testo Chi Siamo */}
+            <motion.div 
+              initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }} variants={popUpSpring}
+              className="w-full md:w-1/2"
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <Leaf className="text-green-600" size={32} />
+                <h2 className="text-4xl font-bold text-green-900">Chi Siamo</h2>
+              </div>
+              <h3 className="text-2xl text-stone-800 font-semibold mb-6">Radici profonde, passione che cresce.</h3>
+              
+              <div className="space-y-4 text-stone-600 text-lg leading-relaxed">
+                <p>
+                  Ciao! Sono <strong>Lorenzo</strong>, il fondatore di Bruder Garden. La mia avventura nel mondo del verde è nata da una passione semplice ma fortissima: trasformare spazi anonimi in angoli di natura vivi e rigogliosi.
+                </p>
+                <p>
+                  Con anni di esperienza sul campo, sporcandomi le mani di terra e studiando le esigenze di ogni singola pianta, ho costruito una realtà che non si limita a "tagliare l'erba", ma che si prende cura dell'intero ecosistema del tuo giardino.
+                </p>
+                <p>
+                  Ogni progetto, dal piccolo cortile di casa al grande parco condominiale, è per me una nuova tela. Lavoro con precisione, puntualità e attrezzature professionali per garantirti un risultato impeccabile, sempre.
+                </p>
+              </div>
+
+              <div className="mt-8">
+                <a href="#contatti" className="inline-flex items-center gap-2 text-green-700 font-bold hover:text-green-600 transition-colors">
+                  Parlami del tuo progetto <ChevronRight size={20} />
+                </a>
+              </div>
+            </motion.div>
+
+          </div>
+        </div>
       </section>
 
       {/* SEZIONE SERVIZI E PREZZI */}
@@ -266,63 +322,6 @@ export default function Home() {
           </motion.div>
         )}
       </AnimatePresence>
-
-      {/* SEZIONE CHI SIAMO */}
-      <section id="chi-siamo" className="py-24 px-4 bg-white">
-        <div className="max-w-6xl mx-auto pt-10">
-          <div className="flex flex-col md:flex-row items-center gap-12 md:gap-16">
-            
-            {/* Foto Chi Siamo */}
-            <motion.div 
-              initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }} variants={slideInLeft}
-              className="w-full md:w-1/2"
-            >
-              <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl aspect-4/5 md:aspect-square group">
-                {/* Immagine segnaposto: cambierai 'src' in locale es: src="/foto-amico.jpg" quando ce l'avrai */}
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img 
-                  src="profilo.png" 
-                  alt="Il fondatore di Bruder Garden" 
-                  className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
-                />
-                {/* Bordino decorativo interno */}
-                <div className="absolute inset-0 border-4 border-green-500 rounded-[2.5rem] scale-95 opacity-50 pointer-events-none"></div>
-              </div>
-            </motion.div>
-
-            {/* Testo Chi Siamo */}
-            <motion.div 
-              initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }} variants={popUpSpring}
-              className="w-full md:w-1/2"
-            >
-              <div className="flex items-center gap-3 mb-4">
-                <Leaf className="text-green-600" size={32} />
-                <h2 className="text-4xl font-bold text-green-900">Chi Siamo</h2>
-              </div>
-              <h3 className="text-2xl text-stone-800 font-semibold mb-6">Radici profonde, passione che cresce.</h3>
-              
-              <div className="space-y-4 text-stone-600 text-lg leading-relaxed">
-                <p>
-                  Ciao! Sono <strong>[Nome]</strong>, il fondatore di Bruder Garden. La mia avventura nel mondo del verde è nata da una passione semplice ma fortissima: trasformare spazi anonimi in angoli di natura vivi e rigogliosi.
-                </p>
-                <p>
-                  Con anni di esperienza sul campo, sporcandomi le mani di terra e studiando le esigenze di ogni singola pianta, ho costruito una realtà che non si limita a "tagliare l'erba", ma che si prende cura dell'intero ecosistema del tuo giardino.
-                </p>
-                <p>
-                  Ogni progetto, dal piccolo cortile di casa al grande parco condominiale, è per me una nuova tela. Lavoro con precisione, puntualità e attrezzature professionali per garantirti un risultato impeccabile, sempre.
-                </p>
-              </div>
-
-              <div className="mt-8">
-                <a href="#contatti" className="inline-flex items-center gap-2 text-green-700 font-bold hover:text-green-600 transition-colors">
-                  Parlami del tuo progetto <ChevronRight size={20} />
-                </a>
-              </div>
-            </motion.div>
-
-          </div>
-        </div>
-      </section>
 
       {/* SEZIONE PORTFOLIO LAVORI */}
       <section id="lavori" className="py-24 px-4 bg-stone-200/50">
