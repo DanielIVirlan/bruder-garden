@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "servizio": "Taglio Prato & Rifiniture",
+    "prezzo": "Da € 35,00",
+    "descrizione": "Taglio professionale mulching e pulizia dei bordi con decespugliatore per un prato perfetto.",
+    "dettagli": [
+      { "nome": "Taglio giardino piccolo (fino a 100mq)", "costo": "€ 35,00 a taglio" },
+      { "nome": "Taglio giardino medio (fino a 500mq)", "costo": "€ 0,50 al mq" },
+      { "nome": "Taglio grandi metrature (oltre 500mq)", "costo": "€ 0,35 al mq" },
+      { "nome": "Arieggiatura e scarificatura prato", "costo": "€ 1,50 al mq" }
+    ]
+  },
+  {
+    "id": 2,
+    "servizio": "Potatura Siepi e Alberi",
+    "prezzo": "Da € 10/ml",
+    "descrizione": "Sagomatura estetica, rimozione rami secchi, messa in sicurezza e smaltimento del verde.",
+    "dettagli": [
+      { "nome": "Potatura siepe bassa (fino a 2 metri)", "costo": "€ 10,00 al metro lineare" },
+      { "nome": "Potatura siepe alta (oltre 2 metri)", "costo": "€ 18,00 al metro lineare" },
+      { "nome": "Abbattimento alberi o potatura in quota", "costo": "Su preventivo (sopralluogo gratuito)" },
+      { "nome": "Smaltimento materiale di risulta in discarica", "costo": "€ 20,00 al metro cubo" }
+    ]
+  },
+  {
+    "id": 3,
+    "servizio": "Posa Prato a Rotoli",
+    "prezzo": "Su Preventivo",
+    "descrizione": "Preparazione del terreno, livellamento, concimazione e posa del prato a pronto effetto.",
+    "dettagli": [
+      { "nome": "Preparazione terreno (fresatura e diserbo)", "costo": "€ 5,00 al mq" },
+      { "nome": "Fornitura e posa Prato Festuca/Poa", "costo": "€ 15,00 al mq" },
+      { "nome": "Fornitura e posa Prato Gramignone", "costo": "€ 18,00 al mq" },
+      { "nome": "Realizzazione impianto di irrigazione", "costo": "Su preventivo" }
+    ]
+  },
+  {
+    "id": 4,
+    "servizio": "Manutenzione Mensile",
+    "prezzo": "Da € 80/mese",
+    "descrizione": "Pacchetto completo chiavi in mano per avere il giardino sempre curato, tutto l'anno.",
+    "dettagli": [
+      { "nome": "Pacchetto Base (1 visita mensile)", "costo": "€ 80,00 / mese" },
+      { "nome": "Pacchetto Standard (2 visite mensili)", "costo": "€ 150,00 / mese" },
+      { "nome": "Pacchetto Premium (4 visite mensili, prato perfetto)", "costo": "€ 280,00 / mese" },
+      { "nome": "Trattamenti fitosanitari (Zanzare, parassiti)", "costo": "Da € 40,00 ad intervento" }
+    ]
+  }
+]
