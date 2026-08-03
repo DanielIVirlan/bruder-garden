@@ -176,7 +176,7 @@ export default function Home() {
             initial={{ opacity: 0, backdropFilter: "blur(0px)" }}
             animate={{ opacity: 1, backdropFilter: "blur(8px)" }}
             exit={{ opacity: 0, backdropFilter: "blur(0px)" }}
-            className="fixed inset-0 z-[100] flex items-center justify-center bg-stone-900/80 p-4"
+            className="fixed inset-0 z-100 flex items-center justify-center bg-stone-900/80 p-4"
             onClick={() => setServizioSelezionato(null)} 
           >
             <motion.div 
@@ -184,7 +184,7 @@ export default function Home() {
               animate={{ scale: 1, y: 0, opacity: 1 }}
               exit={{ scale: 0.9, y: 20, opacity: 0 }}
               transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="bg-white max-w-2xl w-full rounded-[2rem] shadow-2xl overflow-hidden"
+              className="bg-white max-w-2xl w-full rounded-4xl shadow-2xl overflow-hidden"
               onClick={(e) => e.stopPropagation()} 
             >
               <div className="bg-green-50 p-6 md:p-8 flex justify-between items-start border-b border-green-100">
@@ -217,7 +217,7 @@ export default function Home() {
               <div className="bg-stone-50 p-6 text-center border-t border-stone-100">
                 <p className="text-sm text-stone-500 mb-4">I prezzi sono indicativi e possono variare in base alle condizioni del giardino.</p>
                 <a 
-                  href="https://wa.me/393331234567" 
+                  href="https://wa.me/393892579007" 
                   target="_blank" rel="noreferrer"
                   className="inline-flex items-center justify-center gap-2 w-full md:w-auto bg-green-600 hover:bg-green-500 text-white px-8 py-3 rounded-full font-bold transition-colors"
                 >
@@ -259,7 +259,7 @@ export default function Home() {
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={lavoro.galleria[0]} alt={lavoro.titolo} className="object-cover w-full h-full transform group-hover:scale-110 transition-transform duration-700" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/20 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
                   <h4 className="text-white font-bold text-xl">{lavoro.titolo}</h4>
                   <p className="text-green-400 text-sm mt-1 font-semibold flex items-center gap-1">
                     Clicca per {lavoro.galleria.length} foto <ChevronRight size={16} />
@@ -278,13 +278,13 @@ export default function Home() {
             initial={{ opacity: 0, backdropFilter: "blur(0px)" }}
             animate={{ opacity: 1, backdropFilter: "blur(8px)" }}
             exit={{ opacity: 0, backdropFilter: "blur(0px)" }}
-            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4"
+            className="fixed inset-0 z-100 flex items-center justify-center bg-black/90 p-4"
             onClick={() => setLavoroSelezionato(null)} 
           >
-            <button className="absolute top-6 right-6 text-stone-400 hover:text-white hover:rotate-90 transition-all duration-300 z-[101]" onClick={() => setLavoroSelezionato(null)}>
+            <button className="absolute top-6 right-6 text-stone-400 hover:text-white hover:rotate-90 transition-all duration-300 z-101" onClick={() => setLavoroSelezionato(null)}>
               <X size={48} />
             </button>
-            <button className="absolute left-2 md:left-10 text-stone-400 hover:text-white hover:-translate-x-2 transition-all z-[101]" onClick={fotoPrecedente}>
+            <button className="absolute left-2 md:left-10 text-stone-400 hover:text-white hover:-translate-x-2 transition-all z-101" onClick={fotoPrecedente}>
               <ChevronLeft size={56} />
             </button>
             <div className="relative max-w-5xl w-full flex flex-col items-center">
@@ -307,7 +307,7 @@ export default function Home() {
                 <p className="text-green-400 font-medium">Foto {indiceFoto + 1} di {lavoroSelezionato.galleria.length}</p>
               </motion.div>
             </div>
-            <button className="absolute right-2 md:right-10 text-stone-400 hover:text-white hover:translate-x-2 transition-all z-[101]" onClick={fotoSuccessiva}>
+            <button className="absolute right-2 md:right-10 text-stone-400 hover:text-white hover:translate-x-2 transition-all z-101" onClick={fotoSuccessiva}>
               <ChevronRight size={56} />
             </button>
           </motion.div>
@@ -338,7 +338,7 @@ export default function Home() {
 
             <div className="hidden md:block w-px h-32 bg-stone-100 z-10" /> 
 
-            <a href="tel:+393331234567" className="flex flex-col items-center gap-4 z-10 group cursor-pointer">
+            <a href="tel:+393892579007" className="flex flex-col items-center gap-4 z-10 group cursor-pointer">
               <motion.div animate={{ y: [0, -10, 0] }} transition={{ repeat: Infinity, duration: 3, ease: "easeInOut", delay: 0.5 }} className="w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center shadow-inner group-hover:bg-green-600 group-hover:text-white transition-colors duration-300">
                 <Phone size={36} />
               </motion.div>
