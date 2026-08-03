@@ -100,6 +100,7 @@ export default function Home() {
 
           <div className="hidden md:flex gap-6 font-semibold text-stone-600 items-center">
             <a href="#servizi" className="hover:text-green-700 transition-colors">Servizi & Prezzi</a>
+            <a href="#chi-siamo" className="hover:text-green-700 transition-colors">Chi Siamo</a>
             <a href="#lavori" className="hover:text-green-700 transition-colors">I Nostri Lavori</a>
             <a href="#contatti" className="bg-green-600 text-white px-5 py-2 rounded-full hover:bg-green-500 transition-colors">Contatti</a>
           </div>
@@ -123,6 +124,7 @@ export default function Home() {
             >
               <div className="flex flex-col px-6 py-6 gap-6 font-bold text-lg text-stone-700 text-center">
                 <a href="#servizi" onClick={() => setMenuAperto(false)} className="hover:text-green-600">Servizi & Prezzi</a>
+                <a href="#chi-siamo" onClick={() => setMenuAperto(false)} className="hover:text-green-600">Chi Siamo</a>
                 <a href="#lavori" onClick={() => setMenuAperto(false)} className="hover:text-green-600">I Nostri Lavori</a>
                 <a href="#contatti" onClick={() => setMenuAperto(false)} className="bg-green-600 text-white py-3 rounded-full">Contatti</a>
               </div>
@@ -212,7 +214,7 @@ export default function Home() {
             initial={{ opacity: 0, backdropFilter: "blur(0px)" }}
             animate={{ opacity: 1, backdropFilter: "blur(8px)" }}
             exit={{ opacity: 0, backdropFilter: "blur(0px)" }}
-            className="fixed inset-0 z-100 flex items-center justify-center bg-stone-900/80 p-4"
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-stone-900/80 p-4"
             onClick={() => setServizioSelezionato(null)} 
           >
             <motion.div 
@@ -220,7 +222,7 @@ export default function Home() {
               animate={{ scale: 1, y: 0, opacity: 1 }}
               exit={{ scale: 0.9, y: 20, opacity: 0 }}
               transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="bg-white max-w-2xl w-full rounded-4xl shadow-2xl overflow-hidden"
+              className="bg-white max-w-2xl w-full rounded-[2rem] shadow-2xl overflow-hidden"
               onClick={(e) => e.stopPropagation()} 
             >
               <div className="bg-green-50 p-6 md:p-8 flex justify-between items-start border-b border-green-100">
@@ -265,6 +267,63 @@ export default function Home() {
         )}
       </AnimatePresence>
 
+      {/* SEZIONE CHI SIAMO */}
+      <section id="chi-siamo" className="py-24 px-4 bg-white">
+        <div className="max-w-6xl mx-auto pt-10">
+          <div className="flex flex-col md:flex-row items-center gap-12 md:gap-16">
+            
+            {/* Foto Chi Siamo */}
+            <motion.div 
+              initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }} variants={slideInLeft}
+              className="w-full md:w-1/2"
+            >
+              <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl aspect-[4/5] md:aspect-square group">
+                {/* Immagine segnaposto: cambierai 'src' in locale es: src="/foto-amico.jpg" quando ce l'avrai */}
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img 
+                  src="profilo.png" 
+                  alt="Il fondatore di Bruder Garden" 
+                  className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
+                />
+                {/* Bordino decorativo interno */}
+                <div className="absolute inset-0 border-4 border-green-500 rounded-[2.5rem] scale-95 opacity-50 pointer-events-none"></div>
+              </div>
+            </motion.div>
+
+            {/* Testo Chi Siamo */}
+            <motion.div 
+              initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }} variants={popUpSpring}
+              className="w-full md:w-1/2"
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <Leaf className="text-green-600" size={32} />
+                <h2 className="text-4xl font-bold text-green-900">Chi Siamo</h2>
+              </div>
+              <h3 className="text-2xl text-stone-800 font-semibold mb-6">Radici profonde, passione che cresce.</h3>
+              
+              <div className="space-y-4 text-stone-600 text-lg leading-relaxed">
+                <p>
+                  Ciao! Sono <strong>[Nome]</strong>, il fondatore di Bruder Garden. La mia avventura nel mondo del verde è nata da una passione semplice ma fortissima: trasformare spazi anonimi in angoli di natura vivi e rigogliosi.
+                </p>
+                <p>
+                  Con anni di esperienza sul campo, sporcandomi le mani di terra e studiando le esigenze di ogni singola pianta, ho costruito una realtà che non si limita a "tagliare l'erba", ma che si prende cura dell'intero ecosistema del tuo giardino.
+                </p>
+                <p>
+                  Ogni progetto, dal piccolo cortile di casa al grande parco condominiale, è per me una nuova tela. Lavoro con precisione, puntualità e attrezzature professionali per garantirti un risultato impeccabile, sempre.
+                </p>
+              </div>
+
+              <div className="mt-8">
+                <a href="#contatti" className="inline-flex items-center gap-2 text-green-700 font-bold hover:text-green-600 transition-colors">
+                  Parlami del tuo progetto <ChevronRight size={20} />
+                </a>
+              </div>
+            </motion.div>
+
+          </div>
+        </div>
+      </section>
+
       {/* SEZIONE PORTFOLIO LAVORI */}
       <section id="lavori" className="py-24 px-4 bg-stone-200/50">
         <div className="max-w-6xl mx-auto">
@@ -295,7 +354,7 @@ export default function Home() {
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={lavoro.galleria[0]} alt={lavoro.titolo} className="object-cover w-full h-full transform group-hover:scale-110 transition-transform duration-700" />
-                <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/20 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
                   <h4 className="text-white font-bold text-xl">{lavoro.titolo}</h4>
                   <p className="text-green-400 text-sm mt-1 font-semibold flex items-center gap-1">
                     Clicca per {lavoro.galleria.length} foto <ChevronRight size={16} />
@@ -314,13 +373,13 @@ export default function Home() {
             initial={{ opacity: 0, backdropFilter: "blur(0px)" }}
             animate={{ opacity: 1, backdropFilter: "blur(8px)" }}
             exit={{ opacity: 0, backdropFilter: "blur(0px)" }}
-            className="fixed inset-0 z-100 flex items-center justify-center bg-black/90 p-4"
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4"
             onClick={() => setLavoroSelezionato(null)} 
           >
-            <button className="absolute top-6 right-6 text-stone-400 hover:text-white hover:rotate-90 transition-all duration-300 z-101" onClick={() => setLavoroSelezionato(null)}>
+            <button className="absolute top-6 right-6 text-stone-400 hover:text-white hover:rotate-90 transition-all duration-300 z-[101]" onClick={() => setLavoroSelezionato(null)}>
               <X size={48} />
             </button>
-            <button className="absolute left-2 md:left-10 text-stone-400 hover:text-white hover:-translate-x-2 transition-all z-101" onClick={fotoPrecedente}>
+            <button className="absolute left-2 md:left-10 text-stone-400 hover:text-white hover:-translate-x-2 transition-all z-[101]" onClick={fotoPrecedente}>
               <ChevronLeft size={56} />
             </button>
             <div className="relative max-w-5xl w-full flex flex-col items-center">
@@ -343,7 +402,7 @@ export default function Home() {
                 <p className="text-green-400 font-medium">Foto {indiceFoto + 1} di {lavoroSelezionato.galleria.length}</p>
               </motion.div>
             </div>
-            <button className="absolute right-2 md:right-10 text-stone-400 hover:text-white hover:translate-x-2 transition-all z-101" onClick={fotoSuccessiva}>
+            <button className="absolute right-2 md:right-10 text-stone-400 hover:text-white hover:translate-x-2 transition-all z-[101]" onClick={fotoSuccessiva}>
               <ChevronRight size={56} />
             </button>
           </motion.div>
@@ -372,7 +431,6 @@ export default function Home() {
 
             <div className="hidden md:block w-px h-32 bg-stone-100 z-10" /> 
 
-            {/* NUMERO TELEFONICO AGGIORNATO */}
             <a href="tel:+393892579007" className="flex flex-col items-center gap-4 z-10 group cursor-pointer">
               <motion.div animate={{ y: [0, -10, 0] }} transition={{ repeat: Infinity, duration: 3, ease: "easeInOut", delay: 0.5 }} className="w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center shadow-inner group-hover:bg-green-600 group-hover:text-white transition-colors duration-300">
                 <Phone size={36} />
