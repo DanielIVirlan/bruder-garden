@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence, Variants } from "framer-motion";
-import { Leaf, Phone, MapPin, CheckCircle, MessageCircle, X, ChevronLeft, ChevronRight, Info, Menu, Tractor, Wrench, Scissors, Settings } from "lucide-react";
+import { Leaf, Phone, MapPin, CheckCircle, MessageCircle, X, ChevronLeft, ChevronRight, Info, Menu, Tractor, Wrench, Scissors, Settings, Star, ShieldCheck, Award, Send, Trees } from "lucide-react";
 import prezzi from "../data/prezzi.json";
 import lavori from "../data/lavori.json";
 
@@ -82,6 +82,19 @@ export default function Home() {
     { id: 2, titolo: "Decespugliatori Professionali", desc: "Rifiniture perfette e pulizia profonda di erba alta e rovi.", icona: <Wrench size={32} /> },
     { id: 3, titolo: "Motoseghe da Potatura", desc: "Interventi precisi e sicuri per potature e abbattimenti.", icona: <Scissors size={32} /> },
     { id: 4, titolo: "Arieggiatori e Soffiatori", desc: "Per la rigenerazione, la pulizia e la salute del prato.", icona: <Settings size={32} /> }
+  ];
+
+  const certificazioni = [
+    { id: 1, titolo: "Assicurazione RC", desc: "Copertura completa per eventuali danni a terzi durante i lavori.", icona: <ShieldCheck size={36} /> },
+    { id: 2, titolo: "Potature in Quota", desc: "Abilitazione e patentino per lavori ad alto fusto (Tree Climbing).", icona: <Trees size={36} /> },
+    { id: 3, titolo: "Fitosanitari", desc: "Patentino ufficiale per l'uso in sicurezza di trattamenti specifici.", icona: <Award size={36} /> },
+    { id: 4, titolo: "Smaltimento Verde", desc: "Gestione e smaltimento del verde a norma presso centri autorizzati.", icona: <Leaf size={36} /> }
+  ];
+
+  const recensioni = [
+    { id: 1, nome: "Marco R.", testo: "Lorenzo è un vero professionista. Ha rimesso a nuovo il nostro giardino condominiale in un giorno. Consigliatissimo!", zona: "Roma Sud" },
+    { id: 2, nome: "Giulia S.", testo: "Puntuale, preciso e con attrezzatura all'avanguardia. Finalmente ho trovato un giardiniere di fiducia a Roma.", zona: "Eur" },
+    { id: 3, nome: "Alessandro T.", testo: "Ottimo servizio di potatura per i miei ulivi. Lavoro pulito e grande attenzione alla salute delle piante.", zona: "Castelli Romani" }
   ];
 
   return (
@@ -165,7 +178,7 @@ export default function Home() {
       </section>
 
       {/* SEZIONE CHI SIAMO */}
-      <section id="chi-siamo" className="py-24 px-4 bg-white">
+      <section id="chi-siamo" className="pt-24 pb-12 px-4 bg-white">
         <div className="max-w-6xl mx-auto pt-10">
           <div className="flex flex-col md:flex-row items-center gap-12 md:gap-16">
             
@@ -205,15 +218,32 @@ export default function Home() {
                   Ogni progetto, dal piccolo cortile di casa al grande parco condominiale, è per me una nuova tela. Lavoro con precisione, puntualità e attrezzature professionali per garantirti un risultato impeccabile, sempre.
                 </p>
               </div>
-
-              <div className="mt-8">
-                <a href="#contatti" className="inline-flex items-center gap-2 text-green-700 font-bold hover:text-green-600 transition-colors">
-                  Parlami del tuo progetto <ChevronRight size={20} />
-                </a>
-              </div>
             </motion.div>
 
           </div>
+        </div>
+      </section>
+
+      {/* SEZIONE CERTIFICAZIONI E SICUREZZA (Centrata e con alone verde) */}
+      <section className="pb-24 px-4 bg-white">
+        <div className="max-w-6xl mx-auto border-t border-stone-100 pt-16">
+          <motion.div 
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.2 }}
+            className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 text-center"
+          >
+            {certificazioni.map((cert) => (
+              <motion.div key={cert.id} variants={popUpSpring} className="flex flex-col items-center justify-start p-4">
+                <div className="w-20 h-20 mx-auto bg-green-50 rounded-full flex items-center justify-center text-green-600 mb-5 shadow-[0_0_25px_rgba(34,197,94,0.25)] border border-green-100">
+                  {cert.icona}
+                </div>
+                <h3 className="text-lg font-bold text-stone-800 mb-2">{cert.titolo}</h3>
+                <p className="text-stone-500 text-sm leading-relaxed">{cert.desc}</p>
+              </motion.div>
+            ))}
+          </motion.div>
         </div>
       </section>
 
@@ -364,7 +394,6 @@ export default function Home() {
           >
             <p className="text-sm font-bold text-stone-400 tracking-widest uppercase mb-8">I nostri marchi di fiducia</p>
             <div className="flex flex-wrap justify-center items-center gap-12 md:gap-24">
-
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/Stihl_Logo.svg" alt="Stihl" className="h-12 md:h-16 w-auto object-contain" />
               {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -416,6 +445,133 @@ export default function Home() {
         </div>
       </section>
 
+      {/* SEZIONE RECENSIONI */}
+      <section className="py-24 px-4 bg-white">
+        <div className="max-w-6xl mx-auto">
+          <motion.div 
+            initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }} variants={slideInLeft}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl font-bold text-green-900 mb-4">Dicono di Noi</h2>
+            <p className="text-stone-600 text-lg">La soddisfazione dei nostri clienti è la nostra garanzia migliore.</p>
+          </motion.div>
+
+          <motion.div 
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.2 }}
+            className="grid md:grid-cols-3 gap-8"
+          >
+            {recensioni.map((rec) => (
+              <motion.div key={rec.id} variants={popUpSpring} className="bg-stone-50 p-8 rounded-3xl shadow-sm border border-stone-100">
+                <div className="flex gap-1 text-yellow-400 mb-4">
+                  {[...Array(5)].map((_, i) => <Star key={i} size={20} fill="currentColor" />)}
+                </div>
+                <p className="text-stone-700 italic mb-6 leading-relaxed">&quot;{rec.testo}&quot;</p>
+                <div>
+                  <h4 className="font-bold text-stone-900">{rec.nome}</h4>
+                  <span className="text-sm text-stone-500">{rec.zona}</span>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* SEZIONE CONTATTI & MODULO */}
+      <section id="contatti" className="py-24 px-4 bg-stone-100">
+        <div className="max-w-6xl mx-auto">
+          <motion.div 
+            initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }} variants={slideInLeft}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl font-bold text-green-900 mb-4">Pronto per un giardino perfetto?</h2>
+            <p className="text-stone-600 text-lg">Scrivici un messaggio, chiamaci o mandaci un WhatsApp per un preventivo gratuito.</p>
+          </motion.div>
+          
+          <div className="flex flex-col lg:flex-row gap-12 bg-white p-8 md:p-12 rounded-[2.5rem] shadow-2xl border-t-8 border-green-500 relative overflow-hidden">
+            <div className="absolute -right-10 -bottom-10 text-green-50 opacity-50 pointer-events-none z-0">
+              <Leaf size={300} />
+            </div>
+
+            {/* Colonna Sinistra: Recapiti Diretti */}
+            <div className="w-full lg:w-1/3 flex flex-col gap-10 z-10">
+              <div className="flex items-center gap-6">
+                <div className="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center shrink-0">
+                  <MapPin size={28} />
+                </div>
+                <div>
+                  <h4 className="font-bold text-xl text-stone-800">Zona Operativa</h4>
+                  <p className="text-stone-500">Roma e Provincia</p>
+                </div>
+              </div>
+
+              <a href="tel:+393892579007" className="flex items-center gap-6 group">
+                <div className="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center shrink-0 group-hover:bg-green-600 group-hover:text-white transition-colors">
+                  <Phone size={28} />
+                </div>
+                <div>
+                  <h4 className="font-bold text-xl text-stone-800 group-hover:text-green-600 transition-colors">Chiamaci Subito</h4>
+                  <p className="text-stone-500 font-medium">389 257 9007</p>
+                </div>
+              </a>
+
+              <a href="https://wa.me/393892579007" target="_blank" rel="noreferrer" className="flex items-center gap-6 group">
+                <div className="w-16 h-16 bg-[#25D366]/20 text-[#25D366] rounded-full flex items-center justify-center shrink-0 group-hover:bg-[#25D366] group-hover:text-white transition-colors">
+                  <MessageCircle size={28} />
+                </div>
+                <div>
+                  <h4 className="font-bold text-xl text-stone-800 group-hover:text-[#25D366] transition-colors">Scrivici su WhatsApp</h4>
+                  <p className="text-stone-500 font-medium">Risposta veloce</p>
+                </div>
+              </a>
+            </div>
+
+            {/* Colonna Destra: Modulo di Contatto */}
+            <div className="w-full lg:w-2/3 z-10 bg-stone-50 p-8 rounded-3xl border border-stone-100">
+              <h3 className="text-2xl font-bold text-stone-800 mb-6">Inviaci un messaggio</h3>
+              <form action="https://formspree.io/f/xaewwbvq" method="POST" className="flex flex-col gap-4">
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div className="flex flex-col gap-1">
+                    <label htmlFor="nome" className="text-sm font-semibold text-stone-600">Nome o Azienda *</label>
+                    <input type="text" id="nome" name="nome" required className="px-4 py-3 rounded-xl border border-stone-200 focus:outline-none focus:ring-2 focus:ring-green-500 bg-white" placeholder="Es. Mario Rossi" />
+                  </div>
+                  <div className="flex flex-col gap-1">
+                    <label htmlFor="telefono" className="text-sm font-semibold text-stone-600">Telefono *</label>
+                    <input type="tel" id="telefono" name="telefono" required className="px-4 py-3 rounded-xl border border-stone-200 focus:outline-none focus:ring-2 focus:ring-green-500 bg-white" placeholder="Es. 333 1234567" />
+                  </div>
+                </div>
+                
+                <div className="flex flex-col gap-1">
+                  <label htmlFor="email" className="text-sm font-semibold text-stone-600">Email (Opzionale)</label>
+                  <input type="email" id="email" name="email" className="px-4 py-3 rounded-xl border border-stone-200 focus:outline-none focus:ring-2 focus:ring-green-500 bg-white" placeholder="tua@email.com" />
+                </div>
+
+                <div className="flex flex-col gap-1">
+                  <label htmlFor="messaggio" className="text-sm font-semibold text-stone-600">Come possiamo aiutarti? *</label>
+                  <textarea id="messaggio" name="messaggio" required rows={4} className="px-4 py-3 rounded-xl border border-stone-200 focus:outline-none focus:ring-2 focus:ring-green-500 bg-white resize-none" placeholder="Descrivi brevemente il lavoro di cui hai bisogno..."></textarea>
+                </div>
+
+                <button type="submit" className="mt-2 inline-flex justify-center items-center gap-2 bg-green-600 text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-green-500 transition-colors">
+                  Invia Richiesta <Send size={20} />
+                </button>
+              </form>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* FOOTER */}
+      <footer className="bg-stone-900 text-stone-400 py-10 text-center flex flex-col items-center">
+        <div className="flex justify-center items-center gap-2 mb-4 text-stone-500">
+          <Leaf size={20} />
+          <span className="font-bold tracking-widest text-sm">BRUDER GARDEN</span>
+        </div>
+        <p>© 2026 Bruder Garden. Tutti i diritti riservati.</p>
+      </footer>
+
       {/* MODALE DELLA GALLERIA FOTO */}
       <AnimatePresence>
         {lavoroSelezionato && (
@@ -458,57 +614,6 @@ export default function Home() {
           </motion.div>
         )}
       </AnimatePresence>
-
-      {/* SEZIONE CONTATTI */}
-      <section id="contatti" className="py-24 px-4 max-w-4xl mx-auto text-center pt-32">
-        <motion.div initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }} variants={popUpSpring}>
-          <h2 className="text-4xl font-bold text-green-900 mb-8">Pronto per un giardino perfetto?</h2>
-          
-          <div className="bg-white p-10 rounded-[2.5rem] shadow-2xl flex flex-col md:flex-row items-center justify-around gap-8 border-t-8 border-green-500 relative overflow-hidden">
-            <div className="absolute -right-10 -top-10 text-green-50 opacity-50 pointer-events-none">
-              <Leaf size={200} />
-            </div>
-
-            <div className="flex flex-col items-center gap-4 z-10">
-              <motion.div animate={{ y: [0, -10, 0] }} transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }} className="w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center shadow-inner">
-                <MapPin size={36} />
-              </motion.div>
-              <div>
-                <h4 className="font-bold text-2xl text-stone-800">Zona Operativa</h4>
-                <p className="text-stone-500 font-medium text-lg">Roma e Provincia</p>
-              </div>
-            </div>
-
-            <div className="hidden md:block w-px h-32 bg-stone-100 z-10" /> 
-
-            <a href="tel:+393892579007" className="flex flex-col items-center gap-4 z-10 group cursor-pointer">
-              <motion.div animate={{ y: [0, -10, 0] }} transition={{ repeat: Infinity, duration: 3, ease: "easeInOut", delay: 0.5 }} className="w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center shadow-inner group-hover:bg-green-600 group-hover:text-white transition-colors duration-300">
-                <Phone size={36} />
-              </motion.div>
-              <div className="text-center">
-                <h4 className="font-bold text-2xl text-stone-800 group-hover:text-green-600 transition-colors">Chiamaci Subito</h4>
-                <p className="text-stone-500 font-medium text-lg group-hover:text-green-500 transition-colors">389 257 9007</p>
-              </div>
-            </a>
-          </div>
-
-          <motion.div className="mt-14" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-            <a href="https://wa.me/393892579007" target="_blank" rel="noreferrer" className="inline-flex items-center gap-3 bg-[#25D366] text-white px-10 py-5 rounded-full font-bold text-xl shadow-xl hover:bg-[#20b858] transition-colors">
-              <MessageCircle size={28} />
-              Scrivici su WhatsApp
-            </a>
-          </motion.div>
-        </motion.div>
-      </section>
-
-      {/* FOOTER */}
-      <footer className="bg-stone-900 text-stone-400 py-10 text-center flex flex-col items-center">
-        <div className="flex justify-center items-center gap-2 mb-4 text-stone-500">
-          <Leaf size={20} />
-          <span className="font-bold tracking-widest text-sm">BRUDER GARDEN</span>
-        </div>
-        <p>© 2026 Bruder Garden. Tutti i diritti riservati.</p>
-      </footer>
 
     </div>
   );
