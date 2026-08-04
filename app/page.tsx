@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence, Variants } from "framer-motion";
-import { Leaf, Phone, MapPin, CheckCircle, MessageCircle, X, ChevronLeft, ChevronRight, Info, Menu } from "lucide-react";
+import { Leaf, Phone, MapPin, CheckCircle, MessageCircle, X, ChevronLeft, ChevronRight, Info, Menu, Tractor, Wrench, Scissors, Settings } from "lucide-react";
 import prezzi from "../data/prezzi.json";
 import lavori from "../data/lavori.json";
 
@@ -31,7 +31,6 @@ export default function Home() {
   const [servizioSelezionato, setServizioSelezionato] = useState<Servizio | null>(null);
   const [menuAperto, setMenuAperto] = useState(false);
 
-  // 1. FIX: Impedisce il salto dello scroll al refresh
   useEffect(() => {
     if ('scrollRestoration' in history) {
       history.scrollRestoration = 'manual';
@@ -41,21 +40,18 @@ export default function Home() {
     }
   }, []);
 
-  // 2. FIX: Blocca lo scroll in background quando apri un menu o una modale
   useEffect(() => {
     if (lavoroSelezionato || servizioSelezionato || menuAperto) {
-      document.body.style.overflow = "hidden"; // Blocca
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = "auto";   // Sblocca
+      document.body.style.overflow = "auto";
     }
     
-    // Cleanup: assicura che lo scroll torni normale se il componente si smonta
     return () => {
       document.body.style.overflow = "auto";
     };
   }, [lavoroSelezionato, servizioSelezionato, menuAperto]);
 
-  // --- MOTORE DELLE ANIMAZIONI ---
   const staggerContainer: Variants = {
     hidden: { opacity: 0 },
     show: { opacity: 1, transition: { staggerChildren: 0.15 } },
@@ -70,7 +66,6 @@ export default function Home() {
     hidden: { opacity: 0, x: -50 },
     show: { opacity: 1, x: 0, transition: { duration: 0.8, ease: "easeOut" } },
   };
-  // --- FINE MOTORE ANIMAZIONI ---
 
   const fotoSuccessiva = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -81,6 +76,13 @@ export default function Home() {
     e.stopPropagation();
     if (lavoroSelezionato) setIndiceFoto((prev) => (prev === 0 ? lavoroSelezionato.galleria.length - 1 : prev - 1));
   };
+
+  const attrezzature = [
+    { id: 1, titolo: "Trattorini Rasaerba", desc: "Taglio rapido e uniforme per grandi superfici e parchi.", icona: <Tractor size={32} /> },
+    { id: 2, titolo: "Decespugliatori Professionali", desc: "Rifiniture perfette e pulizia profonda di erba alta e rovi.", icona: <Wrench size={32} /> },
+    { id: 3, titolo: "Motoseghe da Potatura", desc: "Interventi precisi e sicuri per potature e abbattimenti.", icona: <Scissors size={32} /> },
+    { id: 4, titolo: "Arieggiatori e Soffiatori", desc: "Per la rigenerazione, la pulizia e la salute del prato.", icona: <Settings size={32} /> }
+  ];
 
   return (
     <div className="min-h-screen bg-stone-50 font-sans text-stone-900 overflow-x-hidden">
@@ -167,7 +169,6 @@ export default function Home() {
         <div className="max-w-6xl mx-auto pt-10">
           <div className="flex flex-col md:flex-row items-center gap-12 md:gap-16">
             
-            {/* Foto Chi Siamo */}
             <motion.div 
               initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }} variants={slideInLeft}
               className="w-full md:w-1/2"
@@ -175,16 +176,14 @@ export default function Home() {
               <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl aspect-4/5 md:aspect-square group">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img 
-                  src="profilo.png" 
+                  src="/profilo.png" 
                   alt="Il fondatore di Bruder Garden" 
                   className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
                 />
-                {/* Bordino decorativo interno */}
                 <div className="absolute inset-0 border-4 border-green-500 rounded-[2.5rem] scale-95 opacity-50 pointer-events-none"></div>
               </div>
             </motion.div>
 
-            {/* Testo Chi Siamo */}
             <motion.div 
               initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }} variants={popUpSpring}
               className="w-full md:w-1/2"
@@ -322,6 +321,58 @@ export default function Home() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* SEZIONE ATTREZZATURA */}
+      <section id="attrezzatura" className="py-24 px-4 bg-white">
+        <div className="max-w-6xl mx-auto pt-10">
+          <motion.div 
+            initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }} variants={slideInLeft}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl font-bold text-green-900 mb-4">La Nostra Attrezzatura</h2>
+            <p className="text-stone-600 text-lg">Investiamo nei migliori macchinari professionali per garantire rapidità e risultati perfetti.</p>
+          </motion.div>
+
+          <motion.div 
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.2 }}
+            className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20"
+          >
+            {attrezzature.map((mezzo) => (
+              <motion.div 
+                key={mezzo.id}
+                variants={popUpSpring}
+                className="bg-stone-50 border border-stone-100 p-8 rounded-3xl text-center shadow-sm hover:shadow-md transition-shadow"
+              >
+                <div className="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                  {mezzo.icona}
+                </div>
+                <h3 className="text-xl font-bold text-stone-800 mb-3">{mezzo.titolo}</h3>
+                <p className="text-stone-600 text-sm leading-relaxed">
+                  {mezzo.desc}
+                </p>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          {/* LOGHI MARCHE DI FIDUCIA */}
+          <motion.div 
+            initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }} variants={popUpSpring}
+            className="text-center"
+          >
+            <p className="text-sm font-bold text-stone-400 tracking-widest uppercase mb-8">I nostri marchi di fiducia</p>
+            <div className="flex flex-wrap justify-center items-center gap-12 md:gap-24">
+
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/Stihl_Logo.svg" alt="Stihl" className="h-12 md:h-16 w-auto object-contain" />
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/Milwaukee_Logo.svg" alt="Milwaukee" className="h-12 md:h-16 w-auto object-contain" />
+            </div>
+          </motion.div>
+        </div>
+      </section>
 
       {/* SEZIONE PORTFOLIO LAVORI */}
       <section id="lavori" className="py-24 px-4 bg-stone-200/50">
