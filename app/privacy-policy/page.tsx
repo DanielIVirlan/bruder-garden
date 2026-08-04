@@ -25,7 +25,7 @@ export default function PrivacyPolicy() {
             <div>
               <div className="flex items-center gap-2 text-green-400 text-sm font-semibold tracking-wider uppercase mb-2">
                 <ShieldCheck className="w-5 h-5" />
-                <span>Informativa Legale</span>
+                <span>Informativa Legale & GDPR</span>
               </div>
               <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-white">
                 Privacy Policy
@@ -44,36 +44,40 @@ export default function PrivacyPolicy() {
                 <Building2 className="w-5 h-5 text-green-500" />
                 1. Titolare del Trattamento dei Dati
               </h2>
-              <p className="text-stone-400 pl-7">
+              <p className="pl-7 text-stone-400">
                 Il Titolare del trattamento è <strong className="text-stone-200">Bruder Garden</strong> di Lorenzo Abruzzetti.
               </p>
-              <div className="pl-7 space-y-1 text-stone-400">
+              <div className="pl-7 space-y-2 text-stone-400">
                 <p className="flex items-center gap-2">
                   <MapPin className="w-4 h-4 text-green-500 shrink-0" />
                   Sede legale: Via Prato Sesia 52, 00166 Roma (RM)
                 </p>
                 <p>Partita IVA: IT16323311007</p>
+                <p className="flex items-center gap-2 pt-1">
+                  <Mail className="w-4 h-4 text-green-500 shrink-0" />
+                  Contatto email privacy: <a href="mailto:Info@brudergarden.it" className="text-green-400 font-medium underline hover:text-green-300">Info@brudergarden.it</a> 
+                </p>
               </div>
             </section>
 
             <section className="space-y-3">
               <h2 className="text-xl font-semibold text-white">2. Tipologie di Dati Raccolti</h2>
-              <p className="text-stone-400 pl-7">
-                Questo sito raccoglie dati personali in modo autonomo o tramite interazioni dirette (modulo di contatto, chiamate telefoniche o collegamenti WhatsApp). I dati possono includere nome, recapito telefonico, indirizzo email e dettagli relativi alle richieste di servizi di giardinaggio.
+              <p className="pl-7 text-stone-400">
+                Questo sito raccoglie dati personali in modo autonomo o tramite interazioni dirette (modulo di contatto, chiamate telefoniche o email dirette a <code className="bg-stone-800 px-1.5 py-0.5 rounded text-stone-200 text-xs">Info@brudergarden.it</code>). I dati possono includere nome, recapito telefonico, indirizzo email e dettagli relativi alle richieste di servizi di giardinaggio.
               </p>
             </section>
 
             <section className="space-y-3">
-              <h2 className="text-xl font-semibold text-white">3. Finalità del Trattamento</h2>
-              <p className="text-stone-400 pl-7">
+              <h2 className="text-xl font-semibold text-white">3. Finalità del Trattamento (GDPR Compliance)</h2>
+              <p className="pl-7 text-stone-400">
                 I dati conferiti dall&apos;utente sono trattati esclusivamente per finalità connesse o strumentali all&apos;attività di Bruder Garden, nello specifico per rispondere a richieste di preventivo, informazioni o per gestire i rapporti contrattuali di assistenza e manutenzione del verde.
               </p>
             </section>
 
             <section className="space-y-3">
               <h2 className="text-xl font-semibold text-white">4. Cookie e Servizi di Terze Parti</h2>
-              <p className="text-stone-400 pl-7">
-                Il sito si avvale di collegamenti a piattaforme esterne, tra cui Google Maps per la geolocalizzazione della sede e la visualizzazione delle recensioni dei clienti. Tali servizi di terze parti potrebbero tracciare l&apos;utente in conformità alle rispettive privacy policy.
+              <p className="pl-7 text-stone-400">
+                Il sito si avvale di collegamenti a piattaforme esterne, tra cui Google Maps per la geolocalizzazione della sede e la visualizzazione delle recensioni dei clienti. Tali servizi di terze parti potrebbero trattare dati in conformità alle rispettive privacy policy.
               </p>
             </section>
 
