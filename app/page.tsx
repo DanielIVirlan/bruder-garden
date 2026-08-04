@@ -5,6 +5,8 @@ import { motion, AnimatePresence, Variants } from "framer-motion";
 import { Leaf, Phone, MapPin, CheckCircle, MessageCircle, X, ChevronLeft, ChevronRight, Info, Menu, Tractor, Wrench, Scissors, Settings, Star, ShieldCheck, Award, Send, Trees } from "lucide-react";
 import prezzi from "../data/prezzi.json";
 import lavori from "../data/lavori.json";
+import Link from 'next/link';
+
 
 type Lavoro = {
   id: number;
@@ -591,13 +593,31 @@ export default function Home() {
       </section>
 
       {/* FOOTER */}
-      <footer className="bg-stone-900 text-stone-400 py-10 text-center flex flex-col items-center">
-        <div className="flex justify-center items-center gap-2 mb-4 text-stone-500">
-          <Leaf size={20} />
-          <span className="font-bold tracking-widest text-sm">BRUDER GARDEN</span>
-        </div>
-        <p>© 2026 Bruder Garden. Tutti i diritti riservati.</p>
-      </footer>
+      <footer className="bg-stone-900 text-stone-400 py-12 px-4 border-t border-stone-800">
+  <div className="max-w-6xl mx-auto text-center space-y-3 text-sm">
+    
+    {/* Riga 1: Dati fiscali e indirizzo */}
+    <p className="text-stone-300">
+      Bruder Garden di Lorenzo Abbruzzetti • P.IVA IT16323311007 • Sede legale: Via Prato Sesia 52, 00166 Roma (RM)
+    </p>
+
+    {/* Riga 2: Copyright */}
+    <p>© 2026 Bruder Garden. Tutti i diritti riservati.</p>
+
+    {/* Riga 3: Privacy Policy */}
+<div className="pt-2">
+  <Link 
+    href="/privacy-policy" 
+    className="text-stone-400 hover:text-green-400 underline transition-colors"
+  >
+    Privacy Policy & Cookie Policy
+  </Link>
+</div>
+
+
+  </div>
+</footer>
+
 
       {/* MODALE DELLA GALLERIA FOTO */}
       <AnimatePresence>
