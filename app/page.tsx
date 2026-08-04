@@ -224,7 +224,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SEZIONE CERTIFICAZIONI E SICUREZZA (Centrata e con alone verde) */}
+      {/* SEZIONE CERTIFICAZIONI E SICUREZZA */}
       <section className="pb-24 px-4 bg-white">
         <div className="max-w-6xl mx-auto border-t border-stone-100 pt-16">
           <motion.div 
@@ -340,8 +340,8 @@ export default function Home() {
               <div className="bg-stone-50 p-6 text-center border-t border-stone-100">
                 <p className="text-sm text-stone-500 mb-4">I prezzi sono indicativi e possono variare in base alle condizioni del giardino.</p>
                 <a 
-                  href="https://wa.me/393892579007" 
-                  target="_blank" rel="noreferrer"
+                  href="#contatti"
+                  onClick={() => setServizioSelezionato(null)}
                   className="inline-flex items-center justify-center gap-2 w-full md:w-auto bg-green-600 hover:bg-green-500 text-white px-8 py-3 rounded-full font-bold transition-colors"
                 >
                   Richiedi Sopralluogo Esatto
@@ -497,15 +497,20 @@ export default function Home() {
 
             {/* Colonna Sinistra: Recapiti Diretti */}
             <div className="w-full lg:w-1/3 flex flex-col gap-10 z-10">
-              <div className="flex items-center gap-6">
-                <div className="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center shrink-0">
+              <a 
+                href="https://www.google.com/maps/place/Roma+RM/@41.910241,12.3959115,11z" 
+                target="_blank" 
+                rel="noreferrer" 
+                className="flex items-center gap-6 group cursor-pointer"
+              >
+                <div className="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center shrink-0 group-hover:bg-green-600 group-hover:text-white transition-colors">
                   <MapPin size={28} />
                 </div>
                 <div>
-                  <h4 className="font-bold text-xl text-stone-800">Zona Operativa</h4>
-                  <p className="text-stone-500">Roma e Provincia</p>
+                  <h4 className="font-bold text-xl text-stone-800 group-hover:text-green-600 transition-colors">Zona Operativa</h4>
+                  <p className="text-stone-500 underline underline-offset-2">Roma e Provincia</p>
                 </div>
-              </div>
+              </a>
 
               <a href="tel:+393892579007" className="flex items-center gap-6 group">
                 <div className="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center shrink-0 group-hover:bg-green-600 group-hover:text-white transition-colors">
