@@ -445,7 +445,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SEZIONE RECENSIONI */}
+            {/* SEZIONE RECENSIONI */}
       <section className="py-24 px-4 bg-white">
         <div className="max-w-6xl mx-auto">
           <motion.div 
@@ -461,14 +461,16 @@ export default function Home() {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.2 }}
-            className="grid md:grid-cols-3 gap-8"
+            className="grid md:grid-cols-3 gap-8 mb-12"
           >
             {recensioni.map((rec) => (
-              <motion.div key={rec.id} variants={popUpSpring} className="bg-stone-50 p-8 rounded-3xl shadow-sm border border-stone-100">
-                <div className="flex gap-1 text-yellow-400 mb-4">
-                  {[...Array(5)].map((_, i) => <Star key={i} size={20} fill="currentColor" />)}
+              <motion.div key={rec.id} variants={popUpSpring} className="bg-stone-50 p-8 rounded-3xl shadow-sm border border-stone-100 flex flex-col justify-between">
+                <div>
+                  <div className="flex gap-1 text-yellow-400 mb-4">
+                    {[...Array(5)].map((_, i) => <Star key={i} size={20} fill="currentColor" />)}
+                  </div>
+                  <p className="text-stone-700 italic mb-6 leading-relaxed">&quot;{rec.testo}&quot;</p>
                 </div>
-                <p className="text-stone-700 italic mb-6 leading-relaxed">&quot;{rec.testo}&quot;</p>
                 <div>
                   <h4 className="font-bold text-stone-900">{rec.nome}</h4>
                   <span className="text-sm text-stone-500">{rec.zona}</span>
@@ -476,8 +478,28 @@ export default function Home() {
               </motion.div>
             ))}
           </motion.div>
+
+          {/* PULSANTE RECENSIONI GOOGLE MAPS */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center"
+          >
+            <a 
+              href="https://maps.app.goo.gl/JE21YP4aZF5EfJYR6?g_st=ic" 
+              target="_blank" 
+              rel="noreferrer"
+              className="inline-flex items-center gap-3 bg-white border-2 border-stone-200 text-stone-800 hover:border-green-600 hover:text-green-700 px-8 py-4 rounded-full font-bold text-base shadow-sm transition-all duration-300"
+            >
+              <Star size={20} className="text-yellow-400" fill="currentColor" />
+              Leggi tutte le recensioni o lasciane una su Google Maps
+            </a>
+          </motion.div>
+
         </div>
       </section>
+
 
       {/* SEZIONE CONTATTI & MODULO */}
       <section id="contatti" className="py-24 px-4 bg-stone-100">
