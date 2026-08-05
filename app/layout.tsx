@@ -8,6 +8,10 @@ title: "Giardiniere Roma | Manutenzione Aree Verdi e Potature | Bruder Garden",
 // La descrizione grigia sotto il titolo su Google (persuasiva per far cliccare)
 description: "Cerchi un giardiniere professionista a Roma? Bruder Garden offre servizi di manutenzione giardini, potature ad alto fusto, tree climbing e cura del prato. Preventivi gratuiti!",
 
+icons: {
+    icon: '/favicon.ico', // Oppure /icon.png
+  },
+
 // Parole chiave principali per aiutare i motori di ricerca
 keywords: [
 "giardiniere Roma",
@@ -38,8 +42,8 @@ follow: true,
 export default function RootLayout({
 children,
 }: Readonly<{
-children: React.ReactNode;
-}>) {
+    children: React.ReactNode;
+    }>) {
 return (
 // Impostiamo la lingua italiana per aiutare la SEO locale
 <html lang="it" className="scroll-smooth">

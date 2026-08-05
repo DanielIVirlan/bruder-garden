@@ -256,7 +256,7 @@ export default function Home() {
           className="text-center mb-16 pt-10"
         >
           <h2 className="text-4xl font-bold text-green-900 mb-4">Cosa Facciamo & Listino</h2>
-          <p className="text-stone-600 text-lg">Trasparenza totale. Clicca sui servizi per vedere il listino dettagliato.</p>
+          <p className="text-stone-600 text-lg">Trasparenza totale. Clicca sui servizi per vedere il listino nel dettaglio.</p>
         </motion.div>
 
         <motion.div 
