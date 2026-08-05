@@ -536,17 +536,17 @@ export default function Home() {
                 </div>
               </a>
 
-              <a href="tel:+393892579007" className="flex items-center gap-6 group">
+              <a href="tel:+393923531298" className="flex items-center gap-6 group">
                 <div className="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center shrink-0 group-hover:bg-green-600 group-hover:text-white transition-colors">
                   <Phone size={28} />
                 </div>
                 <div>
                   <h4 className="font-bold text-xl text-stone-800 group-hover:text-green-600 transition-colors">Chiamaci Subito</h4>
-                  <p className="text-stone-500 font-medium">389 257 9007</p>
+                  <p className="text-stone-500 font-medium">392 353 1298</p>
                 </div>
               </a>
 
-              <a href="https://wa.me/393892579007" target="_blank" rel="noreferrer" className="flex items-center gap-6 group">
+              <a href="https://wa.me/393923531298" target="_blank" rel="noreferrer" className="flex items-center gap-6 group">
                 <div className="w-16 h-16 bg-[#25D366]/20 text-[#25D366] rounded-full flex items-center justify-center shrink-0 group-hover:bg-[#25D366] group-hover:text-white transition-colors">
                   <MessageCircle size={28} />
                 </div>
