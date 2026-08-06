@@ -438,7 +438,7 @@ export default function Home() {
             {/* Colonna Destra */}
             <div className="w-full lg:w-2/3 z-10 bg-stone-50 p-8 rounded-3xl border border-stone-100">
               <h3 className="text-2xl font-bold text-stone-800 mb-6">Inviaci un messaggio</h3>
-              <form action="https://formspree.io/f/xaewwbvq" method="POST" encType="multipart/form-data" className="flex flex-col gap-4">
+              <form action="https://formspree.io/f/xaewwbvq" method="POST" className="flex flex-col gap-4">
                 <div className="grid md:grid-cols-2 gap-4">
                   <div className="flex flex-col gap-1">
                     <label htmlFor="nome" className="text-sm font-semibold text-stone-600">Nome o Azienda *</label>
@@ -458,11 +458,6 @@ export default function Home() {
                 <div className="flex flex-col gap-1">
                   <label htmlFor="messaggio" className="text-sm font-semibold text-stone-600">Come possiamo aiutarti? *</label>
                   <textarea id="messaggio" name="messaggio" required rows={4} className="px-4 py-3 rounded-xl border border-stone-200 focus:outline-none focus:ring-2 focus:ring-green-500 bg-white resize-none" placeholder="Descrivi brevemente il lavoro di cui hai bisogno..."></textarea>
-                </div>
-
-                <div className="flex flex-col gap-1">
-                  <label htmlFor="foto_allegata" className="text-sm font-semibold text-stone-600">Allega foto (Opzionale)</label>
-                  <input type="file" id="foto_allegata" name="foto_allegata" accept="image/*" multiple className="px-4 py-2 rounded-xl border border-stone-200 bg-white text-stone-600 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-green-50 file:text-green-700 hover:file:bg-green-100 transition-colors" />
                 </div>
 
                 <button type="submit" className="mt-2 inline-flex justify-center items-center gap-2 bg-green-600 text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-green-500 transition-colors">
