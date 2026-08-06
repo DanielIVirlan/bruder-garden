@@ -31,11 +31,11 @@ export default function Home() {
   // LISTA DEI LAVORI PRIMA E DOPO
   const listaPrimaDopo: PrimaDopo[] = [
     { id: 1, titolo: "Rigenerazione Prato", prima: "/prima.png", dopo: "/dopo.png" },
-    { id: 2, titolo: "Potatura Siepe", prima: "/prima.png", dopo: "/dopo.jpeg" }, 
+    { id: 2, titolo: "Potatura Siepe", prima: "/prima.png", dopo: "/dopo.png" }, 
     { id: 3, titolo: "Recupero Giardino", prima: "/prima1.png", dopo: "/dopo1.png" },
-    { id: 4, titolo: "Pulizia Viale Esterno", prima: "/prima.png", dopo: "/dopo.jpeg" },
-    { id: 5, titolo: "Messa a Dimora Piante", prima: "/prima.png", dopo: "/dopo.jpeg" },
-    { id: 6, titolo: "Potatura Alberi", prima: "/prima.jpg", dopo: "/dopo.jpeg" }
+    { id: 4, titolo: "Pulizia Viale Esterno", prima: "/prima.png", dopo: "/dopo.png" },
+    { id: 5, titolo: "Messa a Dimora Piante", prima: "/prima.png", dopo: "/dopo.png" },
+    { id: 6, titolo: "Potatura Alberi", prima: "/prima.png", dopo: "/dopo.png" }
   ];
   
   // STATO PER LE RECENSIONI GOOGLE (AGGIORNATO CON QUELLE REALI DELLA FOTO)
