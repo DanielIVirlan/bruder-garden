@@ -244,14 +244,14 @@ export default function Home() {
         )}
       </AnimatePresence>
 
-      {/* SEZIONE ATTREZZATURA */}
+      {/* SEZIONE ATTREZZATURA & LOGHI PARTNER */}
       <section id="attrezzatura" className="py-24 px-4 bg-white">
         <div className="max-w-6xl mx-auto pt-10">
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }} variants={slideInLeft} className="text-center mb-16">
             <h2 className="text-4xl font-bold text-green-900 mb-4">La Nostra Attrezzatura</h2>
             <p className="text-stone-600 text-lg">Investiamo nei migliori macchinari professionali per garantire rapidità e risultati perfetti.</p>
           </motion.div>
-          <motion.div variants={staggerContainer} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
+          <motion.div variants={staggerContainer} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
             {attrezzature.map((mezzo) => (
               <motion.div key={mezzo.id} variants={popUpSpring} className="bg-stone-50 border border-stone-100 p-8 rounded-3xl text-center shadow-sm hover:shadow-md transition-shadow">
                 <div className="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6">{mezzo.icona}</div>
@@ -259,6 +259,15 @@ export default function Home() {
                 <p className="text-stone-600 text-sm leading-relaxed">{mezzo.desc}</p>
               </motion.div>
             ))}
+          </motion.div>
+
+          {/* LOGHI STIHL & MILWAUKEE (COLORI ORIGINALI) */}
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="pt-12 border-t border-stone-100 text-center">
+            <p className="text-stone-400 font-semibold uppercase tracking-wider text-sm mb-8">I nostri marchi di fiducia</p>
+            <div className="flex justify-center items-center gap-12 md:gap-20">
+              <img src="/Stihl_Logo.svg" alt="Stihl" className="h-10 md:h-14 object-contain" />
+              <img src="/Milwaukee_Logo.svg" alt="Milwaukee" className="h-10 md:h-14 object-contain" />
+            </div>
           </motion.div>
         </div>
       </section>
